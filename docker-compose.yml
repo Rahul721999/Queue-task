@@ -1,0 +1,17 @@
+services:
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ port
+      - "15672:15672" # RabbitMQ management port
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      
+volumes:
+  rabbitmq-data:
+    driver: local
